@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Neon Purple-Pink Love Buttons 💜💖</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Montserrat', sans-serif;
+      background: #1a0033;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      overflow-x: hidden;
+      flex-direction: column;
+      padding: 30px 20px;
+      position: relative;
+      transition: background-color 0.5s ease;
+    }
+
+    h1 {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 10px;
+      color: #da22ff;
+      text-shadow:
+        0 0 5px #da22ff,
+        0 0 10px #da22ff,
+        0 0 20px #da22ff,
+        0 0 40px #da22ff;
+      animation: neonPulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes neonPulse {
+      0%, 100% {
+        text-shadow:
+          0 0 5px #da22ff,
+          0 0 10px #da22ff,
+          0 0 20px #da22ff,
+          0 0 40px #da22ff;
+      }
+      50% {
+        text-shadow:
+          0 0 10px #ff6ec4,
+          0 0 20px #ff6ec4,
+          0 0 40px #ff6ec4,
+          0 0 80px #ff6ec4;
+      }
+    }
+
+    #message {
+      font-size: 1.4rem;
+      max-width: 600px;
+      text-align: center;
+      margin-bottom: 30px;
+      line-height: 1.5;
+      color: #ffd6f7;
+      filter: drop-shadow(0 0 3px #da22ff);
+      min-height: 3.5em;
+      user-select: none;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 650px;
+      margin-bottom: 40px;
+    }
+
+    .love-btn {
+      background: #da22ff;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 40px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      box-shadow:
+        0 0 10px #da22ff,
+        0 0 20px #da22ff;
+      transition: background 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+      flex: 1 1 200px;
+      max-width: 200px;
+      text-align: center;
+    }
+    .love-btn:hover {
+      background: #ff6ec4;
+      transform: scale(1.1);
+      box-shadow:
+        0 0 20px #ff6ec4,
+        0 0 40px #ff6ec4;
+    }
+
+    /* Effects container */
+    #effects-container {
+      position: fixed;
+      pointer-events: none;
+      top: 0; left: 0; width: 100%; height: 100%;
+      overflow: visible;
+      z-index: 1000;
+    }
+
+    /* Sparkle effect */
+    .sparkle {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: radial-gradient(circle at center, #ff6ec4, transparent 70%);
+      border-radius: 50%;
+      filter: drop-shadow(0 0 4px #ff6ec4);
+      animation: sparkleMove 1.5s forwards ease-out;
+      opacity: 0.9;
+    }
+
+    @keyframes sparkleMove {
+      0% {
+        transform: translate(0,0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--x), var(--y)) scale(0.1);
+        opacity: 0;
+      }
+    }
+
+    /* Floating hearts effect */
+    .floating-heart {
+      position: absolute;
+      width: 20px;
+      height: 18px;
+      background: #ff6ec4;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      opacity: 0.8;
+      animation: floatUp 2.5s ease forwards;
+      filter: drop-shadow(0 0 5px #da22ff);
+    }
+    .floating-heart:before,
+    .floating-heart:after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff6ec4;
+      border-radius: 50%;
+    }
+    .floating-heart:before {
+      top: -10px;
+      left: 0;
+    }
+    .floating-heart:after {
+      top: 0;
+      left: 10px;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-100px) scale(0.5);
+        opacity: 0;
+      }
+    }
+
+    /* Popup card */
+    #popup-card {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: #2a0050;
+      border-radius: 20px;
+      box-shadow:
+        0 0 30px #ff6ec4,
+        0 0 60px #da22ff;
+      padding: 30px 40px;
+      max-width: 350px;
+      color: #ffd6f7;
+      font-size: 1.2rem;
+      text-align: center;
+      z-index: 1100;
+      user-select: none;
+      opacity: 0;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      pointer-events: none;
+    }
+    #popup-card.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      pointer-events: auto;
+    }
+
+    #popup-close {
+      position: absolute;
+      top: 12px;
+      right: 15px;
+      color: #ff6ec4;
+      font-size: 26px;
+      cursor: pointer;
+      user-select: none;
+      font-weight: 700;
+      transition: color 0.3s ease;
+    }
+    #popup-close:hover {
+      color: #da22ff;
+    }
+
+    /* Quote popup with typing */
+    #quote-popup {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      background: #2a0050dd;
+      border-radius: 15px;
+      padding: 15px 25px;
+      color: #ffd6f7;
+      font-size: 1.1rem;
+      box-shadow: 0 0 20px #da22ff;
+      max-width: 90vw;
+      z-index: 1050;
+      user-select: none;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    #quote-popup.show {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    /* Sliding secret note panel */
+    #secret-note {
+      position: fixed;
+      top: 0;
+      right: -350px;
+      width: 320px;
+      height: 100vh;
+      background: #3a0060;
+      box-shadow: -4px 0 15px #ff6ec4;
+      color: #ffd6f7;
+      font-size: 1.1rem;
+      padding: 30px 25px;
+      overflow-y: auto;
+      transition: right 0.4s ease;
+      z-index: 1200;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+    }
+    #secret-note.show {
+      right: 0;
+    }
+    #secret-close {
+      align-self: flex-end;
+      font-size: 28px;
+      cursor: pointer;
+      font-weight: 700;
+      color: #ff6ec4;
+      user-select: none;
+      margin-bottom: 15px;
+      transition: color 0.3s ease;
+    }
+    #secret-close:hover {
+      color: #da22ff;
+    }
+
+    /* Color flash animation */
+    @keyframes colorFlash {
+      0% {background-color: #1a0033;}
+      25% {background-color: #6f27c1;}
+      50% {background-color: #ff6ec4;}
+      75% {background-color: #a355ca;}
+      100% {background-color: #1a0033;}
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2.4rem;
+      }
+      #message {
+        font-size: 1.2rem;
+        max-width: 90vw;
+      }
+      .buttons {
+        gap: 15px;
+      }
+      .love-btn {
+        padding: 12px 20px;
+        font-size: 1rem;
+        max-width: 100%;
+        flex: 1 1 100%;
+      }
+      #secret-note {
+        width: 100vw;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Hey Beautiful 💜💖</h1>
+  <div id="message">Click any button below to see how much I love you!</div>
+
+  <div class="buttons" role="group" aria-label="Love interaction buttons">
+    <button class="love-btn" id="btn-popup" aria-haspopup="dialog" aria-controls="popup-card">Sweet Card</button>
+    <button class="love-btn" id="btn-confetti">Confetti Burst</button>
+    <button class="love-btn" id="btn-quote">Love Quote</button>
+    <button class="love-btn" id="btn-flash">Color Flash</button>
+    <button class="love-btn" id="btn-heartbloom">Heart Bloom</button>
+    <button class="love-btn" id="btn-secretnote" aria-haspopup="dialog" aria-controls="secret-note">Secret Note</button>
+  </div>
+
+  <div id="effects-container" aria-hidden="true"></div>
+
+  <!-- Popup card -->
+  <div id="popup-card" role="dialog" aria-modal="true" aria-labelledby="popup-title" aria-describedby="popup-desc" tabindex="-1">
+    <div id="popup-close" role="button" tabindex="0" aria-label="Close popup">&times;</div>
+    <h2 id="popup-title">A little surprise for you 💖</h2>
+    <p id="popup-desc">You make my world brighter just by being in it. I love you endlessly, my shining star!</p>
+  </div>
+
+  <!-- Quote popup -->
+  <div id="quote-popup" aria-live="polite" aria-atomic="true" role="alert"></div>
+
+  <!-- Secret note sliding panel -->
+  <aside id="secret-note" role="dialog" aria-modal="true" aria-labelledby="secret-title" tabindex="-1">
+    <div id="secret-close" role="button" tabindex="0" aria-label="Close secret note">&times;</div>
+    <h2 id="secret-title">My Secret Love Note 💜</h2>
+    <p>
+      My dearest,<br><br>
+      Every beat of my heart sings your name.<br>
+      You’re my inspiration, my happiness, and my forever.<br><br>
+      Let’s make memories that glow brighter than these neon lights.<br><br>
+      Forever yours,<br>
+      💖
+    </p>
+  </aside>
+
+  <script>
+    const message = document.getElementById('message');
+    const effectsContainer = document.getElementById('effects-container');
+    const body = document.body;
+
+    // Helper: create sparkles
+    function createSparkle(x, y) {
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('sparkle');
+      sparkle.style.left = `${x}px`;
+      sparkle.style.top = `${y}px`;
+      const randX = (Math.random() - 0.5) * 80 + 'px';
+      const randY = -Math.random() * 80 + 'px';
+      sparkle.style.setProperty('--x', randX);
+      sparkle.style.setProperty('--y', randY);
+      effectsContainer.appendChild(sparkle);
+      sparkle.addEventListener('animationend', () => sparkle.remove());
+    }
+
+    // Helper: create floating heart
+    function createFloatingHeart(x, y) {
+      const heart = document.createElement('div');
+      heart.classList.add('floating-heart');
+      heart.style.left = `${x}px`;
+      heart.style.top = `${y}px`;
+      effectsContainer.appendChild(heart);
+      heart.addEventListener('animationend', () => heart.remove());
+    }
+
+    // Confetti burst
+    function confettiBurst(centerX, centerY) {
+      const colors = ['#ff6ec4', '#da22ff', '#ff3fe9', '#a12eea', '#ff94d8'];
+      for(let i = 0; i < 40; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'fixed';
+        confetti.style.width = '6px';
+        confetti.style.height = '10px';
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = centerX + 'px';
+        confetti.style.top = centerY + 'px';
+        confetti.style.opacity = '0.9';
+        confetti.style.borderRadius = '2px';
+        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+        confetti.style.zIndex = 1001;
+        confetti.style.pointerEvents = 'none';
+        body.appendChild(confetti);
+
+        const angle = Math.random() * 2 * Math.PI;
+        const velocity = Math.random() * 200 + 100;
+
+        let start = null;
+        function animateConfetti(timestamp) {
+          if (!start) start = timestamp;
+          const progress = timestamp - start;
+          const x = centerX + velocity * Math.cos(angle) * progress / 1000;
+          const y = centerY + velocity * Math.sin(angle) * progress / 1000 + 0.5 * 300 * (progress/1000)**2; // gravity
+
+          confetti.style.left = x + 'px';
+          confetti.style.top = y + 'px';
+          confetti.style.opacity = 1 - progress / 1500;
+
+          if (progress < 1500) {
+            requestAnimationFrame(animateConfetti);
+          } else {
+            confetti.remove();
+          }
+        }
+        requestAnimationFrame(animateConfetti);
+      }
+    }
+
+    // Typing effect for quote popup
+    function typeQuote(text, element, callback) {
+      let i = 0;
+      element.textContent = '';
+      element.classList.add('show');
+      function typing() {
+        if(i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          setTimeout(typing, 45);
+        } else if(callback) {
+          setTimeout(() => {
+            element.classList.remove('show');
+            if(callback) callback();
+          }, 4000);
+        }
+      }
+      typing();
+    }
+
+    // Popup card
+    const popupCard = document.getElementById('popup-card');
+    const popupClose = document.getElementById('popup-close');
+
+    // Quote popup
+    const quotePopup = document.getElementById('quote-popup');
+    const loveQuotes = [
+      "Love is composed of a single soul inhabiting two bodies. — Aristotle",
+      "You are my heart, my life, my one and only thought. — Arthur Conan Doyle",
+      "I have waited for you like the earth waits for rain. — Kabir",
+      "You’re the reason I believe in love. — Unknown",
+    ];
+
+    // Secret note panel
+    const secretNote = document.getElementById('secret-note');
+    const secretClose = document.getElementById('secret-close');
+
+    // Heart bloom animation (big heart that expands and fades)
+    function heartBloom() {
+      const heart = document.createElement('div');
+      heart.style.position = 'fixed';
+      heart.style.left = '50%';
+      heart.style.top = '50%';
+      heart.style.transform = 'translate(-50%, -50%) scale(0)';
+      heart.style.width = '150px';
+      heart.style.height = '135px';
+      heart.style.background = '#ff6ec4';
+      heart.style.borderRadius = '50% 50% 50% 50% / 60% 60% 40% 40%';
+      heart.style.zIndex = 1500;
+      heart.style.filter = 'drop-shadow(0 0 15px #da22ff)';
+      heart.style.opacity = '0.9';
+      heart.style.pointerEvents = 'none';
+      heart.style.transition = 'transform 0.8s ease, opacity 0.8s ease';
+
+      // Create the two lobes
+      const before = document.createElement('div');
+      before.style.content = '""';
+      before.style.position = 'absolute';
+      before.style.width = '150px';
+      before.style.height = '150px';
+      before.style.background = '#ff6ec4';
+      before.style.borderRadius = '50%';
+      before.style.top = '-75px';
+      before.style.left = '0';
+      heart.appendChild(before);
+
+      const after = document.createElement('div');
+      after.style.content = '""';
+      after.style.position = 'absolute';
+      after.style.width = '150px';
+      after.style.height = '150px';
+      after.style.background = '#ff6ec4';
+      after.style.borderRadius = '50%';
+      after.style.top = '0';
+      after.style.left = '75px';
+      heart.appendChild(after);
+
+      body.appendChild(heart);
+
+      // Trigger bloom
+      requestAnimationFrame(() => {
+        heart.style.transform = 'translate(-50%, -50%) scale(1)';
+        heart.style.opacity = '1';
+      });
+
+      // Fade out after some time
+      setTimeout(() => {
+        heart.style.transform = 'translate(-50%, -50%) scale(0)';
+        heart.style.opacity = '0';
+      }, 1500);
+
+      setTimeout(() => heart.remove(), 2300);
+    }
+
+    // Color flash animation trigger
+    function startColorFlash() {
+      body.style.animation = 'colorFlash 3s ease forwards';
+      setTimeout(() => {
+        body.style.animation = '';
+      }, 3000);
+    }
+
+    // Button event handlers
+
+    // Sweet popup card
+    document.getElementById('btn-popup').addEventListener('click', (e) => {
+      popupCard.classList.add('show');
+      popupCard.focus();
+
+      const rect = e.currentTarget.getBoundingClientRect();
+      for(let i=0; i<15; i++) {
+        const offsetX = rect.left + rect.width/2 + (Math.random() - 0.5) * 60;
+        const offsetY = rect.top + rect.height/2 + (Math.random() - 0.5) * 60;
+        createSparkle(offsetX, offsetY);
+      }
+    });
+    popupClose.addEventListener('click', () => {
+      popupCard.classList.remove('show');
+    });
+    popupClose.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        popupCard.classList.remove('show');
+        popupClose.blur();
+      }
+    });
+
+    // Confetti burst
+    document.getElementById('btn-confetti').addEventListener('click', (e) => {
+      message.textContent = "🎉 Yay! Confetti time!";
+      const rect = e.currentTarget.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      confettiBurst(centerX, centerY);
+    });
+
+    // Love quote popup with typing animation
+    document.getElementById('btn-quote').addEventListener('click', () => {
+      const randomQuote = loveQuotes[Math.floor(Math.random() * loveQuotes.length)];
+      message.textContent = "";
+      typeQuote(randomQuote, quotePopup);
+    });
+
+    // Color flash background
+    document.getElementById('btn-flash').addEventListener('click', () => {
+      message.textContent = "Feel the love glow!";
+      startColorFlash();
+    });
+
+    // Heart bloom
+    document.getElementById('btn-heartbloom').addEventListener('click', (e) => {
+      message.textContent = "My heart blooms for you! 💖";
+      const rect = e.currentTarget.getBoundingClientRect();
+      for(let i=0; i<10; i++) {
+        const offsetX = rect.left + rect.width/2 + (Math.random() - 0.5) * 60;
+        const offsetY = rect.top + rect.height/2 + (Math.random() - 0.5) * 60;
+        createSparkle(offsetX, offsetY);
+      }
+      heartBloom();
+    });
+
+    // Secret note sliding panel
+    document.getElementById('btn-secretnote').addEventListener('click', () => {
+      secretNote.classList.add('show');
+      secretNote.focus();
+      message.textContent = "A secret note just for you 💜";
+    });
+    secretClose.addEventListener('click', () => {
+      secretNote.classList.remove('show');
+      message.textContent = "Click any button below to see how much I love you!";
+    });
+    secretClose.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        secretNote.classList.remove('show');
+        secretClose.blur();
+        message.textContent = "Click any button below to see how much I love you!";
+      }
+    });
+
+  </script>
+
+</body>
+</html>
